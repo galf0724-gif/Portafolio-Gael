@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Inicio
+title: HOLAA
 ---
 
 # Gael — Portafolio Técnico
