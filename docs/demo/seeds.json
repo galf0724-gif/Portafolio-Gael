@@ -1,0 +1,4 @@
+[
+  {"model": "catalog.product", "pk": 1, "fields": {"sku": "P-001", "name": "Teclado", "price": "12.50"}},
+  {"model": "catalog.product", "pk": 2, "fields": {"sku": "P-002", "name": "Mouse", "price": "8.90"}}
+]
