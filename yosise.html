@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto Yosise - Gael Lopez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .subtitle {
+            color: #a8b2d1;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.8s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccd6f6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            font-size: 1rem;
+            color: #a8b2d1;
+            margin: 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            padding: 0.5rem 1.2rem;
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50px;
+            color: #667eea;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .tech-badge:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #a8b2d1;
+        }
+
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            border: 2px solid #667eea;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy-bg"></div>
+    <div class="stars" id="stars"></div>
+
+    <div class="content">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                ← Volver al portafolio
+            </a>
+
+            <header>
+                <h1>Proyecto Yosise</h1>
+                <p class="subtitle">Plataforma web desarrollada con Django y tecnologías modernas</p>
+            </header>
+
+            <section>
+                <h2>Descripción del Proyecto</h2>
+                <p>
+                    Yosise es una aplicación web full-stack desarrollada colaborativamente, enfocada en [describe brevemente la funcionalidad principal del proyecto]. 
+                    Mi participación incluyó el desarrollo de componentes backend con Django, implementación de modelos de base de datos, 
+                    y colaboración en el diseño de la arquitectura general del sistema.
+                </p>
+                <p>
+                    Este proyecto me permitió aplicar conocimientos de desarrollo web moderno, trabajar con control de versiones 
+                    en un entorno colaborativo, y seguir buenas prácticas de desarrollo por features usando Git/GitHub.
+                </p>
+            </section>
+
+            <section>
+                <h2>Características Principales</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <h3>Autenticación</h3>
+                        <p>Sistema de registro y login de usuarios con validación y seguridad implementada</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💾</div>
+                        <h3>Base de Datos</h3>
+                        <p>Modelos Django ORM optimizados con relaciones y consultas eficientes</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Interfaz Responsive</h3>
+                        <p>Frontend adaptable con HTML5, CSS3 y Bootstrap para diferentes dispositivos</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>API REST</h3>
+                        <p>Endpoints para comunicación asíncrona y gestión de datos</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Tecnologías Utilizadas</h2>
+                <div class="tech-stack">
+                    <span class="tech-badge">Python 3.x</span>
+                    <span class="tech-badge">Django</span>
+                    <span class="tech-badge">Django ORM</span>
+                    <span class="tech-badge">SQLite</span>
+                    <span class="tech-badge">HTML5</span>
+                    <span class="tech-badge">CSS3</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Bootstrap</span>
+                    <span class="tech-badge">Git</span>
+                    <span class="tech-badge">GitHub</span>
+                </div>
+            </section>
+
+            <section>
+                <h2>Mi Contribución</h2>
+                <div class="highlight-box">
+                    <h3>Responsabilidades y Logros</h3>
+                    <ul>
+                        <li>Diseño e implementación de modelos de base de datos con Django ORM</li>
+                        <li>Desarrollo de vistas basadas en clases (Class-Based Views) para gestión de datos</li>
+                        <li>Implementación de formularios Django con validaciones personalizadas</li>
+                        <li>Colaboración en el control de versiones usando Git con branching y pull requests</li>
+                        <li>Participación en code reviews y mejora continua del código</li>
+                        <li>Documentación de funcionalidades y proceso de desarrollo</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Aprendizajes Clave</h2>
+                <p>
+                    Durante el desarrollo de Yosise, fortalecí mis habilidades en trabajo colaborativo, 
+                    aprendí a gestionar conflictos en Git, y mejoré mi comprensión de arquitecturas MVC/MTV. 
+                    También adquirí experiencia práctica en la implementación de buenas prácticas de seguridad 
+                    y optimización de consultas a base de datos.
+                </p>
+            </section>
+
+            <section>
+                <h2>Enlaces del Proyecto</h2>
+                <div class="cta-buttons">
+                    <a href="https://github.com/galf0724-gif/yosise" class="btn-primary" target="_blank">Ver en GitHub</a>
+                    <a href="demo.html" class="btn-secondary">Ver Demo</a>
+                    <a href="index.html" class="btn-secondary">Volver al Portafolio</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
