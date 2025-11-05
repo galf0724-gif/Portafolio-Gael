@@ -1,6 +1,6 @@
 ---
 layout: default
-title: HOLAA
+title: Gael Lopez
 ---
 
 # Gael — Portafolio Técnico
@@ -19,6 +19,6 @@ Experiencia en control de versiones con **Git/GitHub**, buenas prácticas y trab
 - Dev: Git (branching, PRs, code review), entornos virtuales, pruebas básicas.
 
 ## Enlaces
-- Snippets seleccionados: [`/snippets`](https://github.com/<USUARIO_GITHUB>/portafolio-gael/tree/main/snippets) *(reemplaza `<USUARIO_GITHUB>`)*
+- Snippets seleccionados: [`/snippets`](https://github.com/<galf0724-gi>/portafolio-gael/tree/main/snippets) 
 - Demo aislada: ver instrucciones en [docs/demo/README.md](./demo/README.md).
 - Acceso a código real: disponible **bajo solicitud**.
