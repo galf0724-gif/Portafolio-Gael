@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo - Gael Lopez</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0a0a1a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #667eea;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.5);
+        }
+
+        .subtitle {
+            color: #a8b2d1;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            animation: slideUp 0.8s ease;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccd6f6;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            color: #a8b2d1;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .code-block code {
+            color: #667eea;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #ccd6f6;
+        }
+
+        .info-box strong {
+            color: #667eea;
+        }
+
+        .steps-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(102, 126, 234, 0.05);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            border-radius: 12px;
+            position: relative;
+            padding-left: 4rem;
+            transition: all 0.3s;
+        }
+
+        .steps-list li:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px dashed rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            transition: all 0.3s;
+        }
+
+        .screenshot-placeholder:hover {
+            border-color: rgba(102, 126, 234, 0.6);
+            background: rgba(102, 126, 234, 0.15);
+        }
+
+        .screenshot-placeholder p {
+            color: #667eea;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 0;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 1.5rem;
+            }
+
+            .steps-list li {
+                padding-left: 3rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy-bg"></div>
+    <div class="stars" id="stars"></div>
+
+    <div class="content">
+        <div class="container">
+            <a href="index.html" class="back-button">
+                ← Volver al portafolio
+            </a>
+
+            <header>
+                <h1>Demo Aislada</h1>
+                <p class="subtitle">Instrucciones para ejecutar y probar el proyecto localmente</p>
+            </header>
+
+            <section>
+                <h2>Requisitos Previos</h2>
+                <p>
+                    Antes de ejecutar la demo, asegúrate de tener instalado lo siguiente en tu sistema:
+                </p>
+                <ul class="steps-list" style="list-style: none; padding: 0;">
+                    <li style="padding: 1rem 1rem 1rem 3rem; position: relative;">
+                        <strong style="color: #667eea;">Python 3.8+</strong> - Descarga desde <a href="https://python.org" style="color: #667eea;">python.org</a>
+                    </li>
+                    <li style="padding: 1rem 1rem 1rem 3rem; position: relative;">
+                        <strong style="color: #667eea;">Git</strong> - Para clonar el repositorio
+                    </li>
+                    <li style="padding: 1rem 1rem 1rem 3rem; position: relative;">
+                        <strong style="color: #667eea;">pip</strong> - Gestor de paquetes de Python (incluido con Python)
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Instalación y Configuración</h2>
+                <ol class="steps-list">
+                    <li>
+                        <strong style="color: #ccd6f6;">Clonar el repositorio</strong>
+                        <div class="code-block">
+                            <pre><code>git clone https://github.com/galf0724-gif/yosise.git
+cd yosise</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong style="color: #ccd6f6;">Crear entorno virtual</strong>
+                        <div class="code-block">
+                            <pre><code>python -m venv venv
+
+# En Windows:
+venv\Scripts\activate
+
+# En Linux/Mac:
+source venv/bin/activate</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong style="color: #ccd6f6;">Instalar dependencias</strong>
+                        <div class="code-block">
+                            <pre><code>pip install -r requirements.txt</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong style="color: #ccd6f6;">Configurar la base de datos</strong>
+                        <div class="code-block">
+                            <pre><code>python manage.py makemigrations
+python manage.py migrate</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong style="color: #ccd6f6;">Crear superusuario (opcional)</strong>
+                        <div class="code-block">
+                            <pre><code>python manage.py createsuperuser</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong style="color: #ccd6f6;">Ejecutar el servidor de desarrollo</strong>
+                        <div class="code-block">
+                            <pre><code>python manage.py runserver</code></pre>
+                        </div>
+                        <p style="margin-top: 1rem; color: #a8b2d1;">El servidor estará disponible en: <code style="color: #667eea;">http://127.0.0.1:8000/</code></p>
+                    </li>
+                </ol>
+            </section>
+
+            <section>
+                <h2>Funcionalidades Disponibles</h2>
+                <div class="info-box">
+                    <p><strong>🎯 Panel de Administración:</strong> Accede a <code style="color: #667eea;">http://127.0.0.1:8000/admin/</code> con las credenciales del superusuario</p>
+                </div>
+                <div class="info-box">
+                    <p><strong>📝 Funciones principales:</strong> [Describe aquí las funcionalidades principales que se pueden probar en la demo]</p>
+                </div>
+                <div class="info-box">
+                    <p><strong>🔧 Pruebas:</strong> Ejecuta <code style="color: #667eea;">python manage.py test</code> para correr las pruebas unitarias</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Capturas de Pantalla</h2>
+                <div class="screenshot-placeholder">
+                    <p>📸 Aquí puedes agregar capturas<br>de pantalla del proyecto</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Solución de Problemas</h2>
+                <p style="color: #ccd6f6; margin-bottom: 1.5rem;">Si encuentras algún problema durante la instalación:</p>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.75rem;">Error de módulos no encontrados</h3>
+                    <div class="code-block">
+                        <pre><code>pip install --upgrade pip
+pip install -r requirements.txt --force-reinstall</code></pre>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <h3 style="color: #667eea; font-size: 1.2rem; margin-bottom: 0.75rem;">Error de base de datos</h3>
+                    <div class="code-block">
+                        <pre><code>python manage.py flush
+python manage.py migrate --run-syncdb</code></pre>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>💡 Nota:</strong> Para más ayuda, consulta el archivo <code style="color: #667eea;">README.md</code> en el repositorio o abre un issue en GitHub.</p>
+                </div>
+            </section>
+
+            <section>
+                <h2>Enlaces Relacionados</h2>
+                <div class="btn-group">
+                    <a href="https://github.com/galf0724-gif/yosise" class="btn btn-primary" target="_blank">Ver Repositorio</a>
+                    <a href="yosise.html" class="btn btn-secondary">Detalles del Proyecto</a>
+                    <a href="index.html" class="btn btn-secondary">Volver al Portafolio</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 3;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+    </script>
+</body>
+</html>
