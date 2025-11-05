@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Proyecto X — Caso de estudio
+title: Proyecto Yosise — Caso de estudio
 ---
 
-# Proyecto X — Caso de estudio
+# Proyecto yosise — Caso de estudio
 
 > **Nota:** Este documento describe el alcance personal de Gael dentro de un proyecto privado.
 > El código completo y repositorios internos no se publican. Se ofrecen **snippets** limitados,
