@@ -10,7 +10,7 @@ Experiencia en control de versiones con **Git/GitHub**, buenas prácticas y trab
 
 - Certificaciones destacadas: *Python*, *Django fundamentos*, *Git y GitHub*, *Bases de datos* (placeholders).
 - Repositorios y contribuciones bajo revisión en entornos privados.
-- **Caso de estudio principal**: [Proyecto X](./proyecto-yosise.md).
+- **Caso de estudio principal**: [Proyecto yosise](./proyecto-yosise.md).
 
 ## Habilidades
 - Backend: Python (3.x), Django (ORM, views, class-based views, forms), API básica.
