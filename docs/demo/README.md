@@ -1,10 +1,10 @@
 # Demo aislada (mock)
 
-Pequeño ejemplo con Django para ilustrar conceptos usados en el **Proyecto X** sin exponer código propietario.
+Pequeño ejemplo con Django para ilustrar conceptos usados en el **Proyecto Yosise.com** sin exponer código propietario.
 
 ## Requisitos
 - Python 3.10+
-- pip
+- pip 
 
 ## Pasos
 ```bash
